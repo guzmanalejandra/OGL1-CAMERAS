@@ -9,8 +9,16 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
+uniform float time;
+out vec2 UVs;
+out vec3 norms;
+out vec3 pos;
+
 void main()
 {
+    UVs = texcoords;
+    norms = normals;
+    pos = (modelMatrix * vec4(position + normals * sin(time * 3)/10, 1.0)).xyz;
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }
 '''
@@ -18,11 +26,18 @@ fragment_shader = """
 #version 450 core
 
 out vec4 fragColor;
+
 in vec3 outColor;
+in vec2 UVs;
+in vec3 norms;
+
+uniform vec3 pointLight;
+uniform sampler2D tex;
 
 void main()
 {
-    fragColor = outColor;
+    float intensity = dot(norms, normalize(pointLight - pos));
+    fragColor = texture(tex, UVs)*intensity;
 }
 
 """
