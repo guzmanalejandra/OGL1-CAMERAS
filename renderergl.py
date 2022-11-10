@@ -46,6 +46,25 @@ while isRunning:
 
     elif keys[K_RIGHT]:
         rend.camPosition.x += 10 * deltaTime
+       
+    elif keys[K_UP]:
+        rend.camPosition.y += 10 * deltaTime
+        
+    elif keys[K_DOWN]:
+        rend.camPosition.y -= 10 * deltaTime
+        
+    elif keys[K_q]:
+        rend.pointLight.x -= 10 * deltaTime
+        
+    elif keys[K_w]:
+        rend.pointLight.x += 10 * deltaTime
+        
+    elif keys[K_e]:
+        rend.pointLight.y += 10 * deltaTime
+        
+    elif keys[K_r]:
+        rend.pointLight.y -= 10 * deltaTime
+        
 
     deltaTime = clock.tick(60) / 1000
     #print(deltaTime)
