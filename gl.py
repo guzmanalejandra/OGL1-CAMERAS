@@ -133,6 +133,20 @@ class Model(object):
                               ctypes.c_void_p(4*5))# Offset
 
         glEnableVertexAttribArray(2)
+        
+        glActiveTexture( GL_TEXTURE0 )
+        glBindTexture(GL_TEXTURE_2D, self.texture)
+        glTexImage2D(GL_TEXTURE_2D,                     # Texture Type
+                     0,                                 # Positions
+                     GL_RGB,                            # Format
+                     self.textureSurface.get_width(),   # Width
+                     self.textureSurface.get_height(),  # Height
+                     0,                                 # Border
+                     GL_RGB,                            # Format
+                     GL_UNSIGNED_BYTE,                  # Type
+                     self.textureData)                  # Data
+
+        glGenerateMipmap(GL_TEXTURE_2D)
 
         glDrawArrays(GL_TRIANGLES, 0, self.polycount * 3 )
 
