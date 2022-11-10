@@ -173,6 +173,13 @@ class Renderer(object):
                                                 0.1,                    # Near Plane
                                                 1000)                   # Far Plane
         
+    def filledMode(self):
+        glPolygonMode(GL_FRONT, GL_FILL)
+
+    def wireframeMode(self):
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
+
+        
 
     def getViewMatrix(self):
         identity = glm.mat4(1)
